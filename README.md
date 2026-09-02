@@ -47,7 +47,7 @@
 | ReShade Configuration | `ReShade.ini` | `DLSS5_MV_PROVIDER=3` |
 | ReShade Preset | `ReshadePreset.ini` | Load order: Lumenite_Kernel → DLSS5_Feed |
 | Lumenite Textures | `lumenite_bluenoise256.png` | LumeniteFX |
-| Installer Music (optional) | `musicainstalador.mp3` | Custom |
+| Installer Music | `musicainstalador.mp3` | Custom |
 | Wizard Image | `fotoinstalador.bmp` | Custom |
 
 ---
