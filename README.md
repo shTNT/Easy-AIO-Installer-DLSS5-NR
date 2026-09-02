@@ -2,6 +2,9 @@
 
 by Kry0genik  
 https://www.nexusmods.com/profile/Kry0genik
+- [Requirements](https://YOUR_USERNAME.github.io/YOUR_REPO/requirements)
+- [File Index & Sources](https://YOUR_USERNAME.github.io/YOUR_REPO/file-index)
+- [Known Issues](https://YOUR_USERNAME.github.io/YOUR_REPO/#known-issues--fixes)
 
 ---
 
