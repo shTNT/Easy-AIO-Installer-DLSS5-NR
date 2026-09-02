@@ -166,7 +166,3 @@ Some issues are caused by the game itself, not the installer.
 Always use a clean ReShade installation with full add-on support and standard effects before installing the Easy AIO pack.
 
 For more information, visit the official Nexus Mods page or the GitHub repository.
-
-## Requirements
-
-See the [full requirements page](./requirements.md) for more details.
