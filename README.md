@@ -1,17 +1,25 @@
 # Easy AIO Installer: DLSS 5 + RenoDX + Lumenite ReShade Pack v2.1
 
-by Kry0genik  
-https://www.nexusmods.com/profile/Kry0genik
-- [Requirements](https://YOUR_USERNAME.github.io/YOUR_REPO/requirements)
-- [File Index & Sources](https://YOUR_USERNAME.github.io/YOUR_REPO/file-index)
-- [Known Issues](https://YOUR_USERNAME.github.io/YOUR_REPO/#known-issues--fixes)
+**by Kry0genik**  
+[![Nexus Mods](https://img.shields.io/badge/Nexus%20Mods-DLSS%205%20AIO-blue)](https://www.nexusmods.com/site/mods/2251)  
+[![GitHub Pages](https://img.shields.io/badge/Docs-GitHub%20Pages-green)](https://shTNT.github.io/Easy-AIO-Installer-DLSS5-NR/)  
+[![GitHub release](https://img.shields.io/github/v/release/shTNT/Easy-AIO-Installer-DLSS5-NR)](https://github.com/shTNT/Easy-AIO-Installer-DLSS5-NR/releases)  
+[![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
+
+> A hassle-free installer that automates the installation of DLSS 5 Neural Rendering (NR) into your game folder. No manual file hunting, no complex guides. Everything is pre-configured and ready to use.
 
 ---
 
-## What is this?
+## Contents
 
-A hassle-free installer that automates the installation of DLSS 5 Neural Rendering (NR) into your game folder.  
-No manual file hunting, no complex guides. Everything is pre-configured and ready to use.
+- [Requirements](#requirements)
+- [File Index & Sources](#file-index--sources)
+- [Known Issues](#known-issues--fixes)
+- [Installation](#installation-steps)
+- [In-Game Controls](#in-game-controls)
+- [Adjusting Neural Rendering](#adjusting-neural-rendering)
+- [Transparency](#transparency)
+- [Disclaimer](#disclaimer)
 
 ---
 
@@ -22,6 +30,31 @@ No manual file hunting, no complex guides. Everything is pre-configured and read
 - NVIDIA RTX 20/30/40/50 series GPU (RTX 30+ recommended).
 - Latest NVIDIA drivers.
 - Single-player games (anti-cheat may block injection).
+
+---
+
+## File Index & Sources
+
+| Component | File(s) | Version / Source |
+|-----------|---------|------------------|
+| DLSS 5 Neural Rendering Add-on | `renodx-dlss5.addon64` | v4.7 (not ShortFuse's mod) |
+| Lumenite Motion Vectors | `lumenite_Kernel.fx` + includes | [LumeniteFX](https://github.com/umar-afzaal/LumeniteFX) |
+| DLSS5 Bridge (native DLSS) | `dlss5-dx11-bridge.addon64` | v1.4.1 – [NIGos/dlss5-bridge](https://github.com/NIGos/dlss5-bridge/releases/tag/v1.4.1) |
+| DLSS5 Feeder (non-native DLSS) | `dlss5-feed.addon64` | v0.11.0-beta.2 – [jlrouzies-fr/DLSS5-Feeder](https://github.com/jlrouzies-fr/DLSS5-Feeder/releases/tag/v0.11.0-beta.2) |
+| DLSS5 Feed Shader | `DLSS5_Feed.fx` | Bundled with Feeder |
+| Patched DLSS-NR | `nvngx_dlssnr.dll` | RenoDX SF patched |
+| NVIDIA Streamline DLLs | `nvngx_dlss.dll`, `nvngx_dlssg.dll`, ... | RenoDX Streamline Files |
+| ReShade Configuration | `ReShade.ini` | `DLSS5_MV_PROVIDER=3` |
+| ReShade Preset | `ReshadePreset.ini` | Load order: Lumenite_Kernel → DLSS5_Feed |
+| Lumenite Textures | `lumenite_bluenoise256.png` | LumeniteFX |
+| Installer Music (optional) | `musicainstalador.mp3` | Custom |
+| Wizard Image | `fotoinstalador.bmp` | Custom |
+
+---
+
+## Known Issues & Fixes
+
+See the full guide on the [documentation site](https://shTNT.github.io/Easy-AIO-Installer-DLSS5-NR/).
 
 ---
 
@@ -62,13 +95,6 @@ No manual file hunting, no complex guides. Everything is pre-configured and read
 - Full installer source code is included in this repository.
 - File tree and file index are provided.
 - The installer only uses publicly available patched NVIDIA DLLs and ReShade files.
-
----
-
-## Known Issues & Fixes
-
-See the **Known Issues & Fixes** section on the Nexus Mods page:  
-https://www.nexusmods.com/site/mods/2251
 
 ---
 
