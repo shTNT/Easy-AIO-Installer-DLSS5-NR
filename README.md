@@ -54,7 +54,7 @@
 
 ## Known Issues & Fixes - Generic & Per-Game Workarounds
 
-See the full guide on the [documentation site](https://shTNT.github.io/Easy-AIO-Installer-DLSS5-NR/).
+See the full guide on the [documentation site](https://github.com/shTNT/Easy-AIO-Installer-DLSS5-NR/tree/main/docs).
 
 ---
 
