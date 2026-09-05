@@ -1,4 +1,4 @@
-# Easy AIO Installer: DLSS 5 + RenoDX + Lumenite ReShade Pack v2.1
+# Easy AIO Installer: DLSS 5 + RenoDX + Lumenite ReShade Pack v2.2
 
 **by Kry0genik**  
 [![Nexus Mods](https://img.shields.io/badge/Nexus%20Mods-DLSS%205%20AIO-blue)](https://www.nexusmods.com/site/mods/2251)  
