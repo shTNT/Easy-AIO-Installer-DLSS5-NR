@@ -10,6 +10,23 @@
 
 ---
 
+## What's new in v2.2
+
+### Updated components
+- **RenoDX DLSS add-on**: multithreaded command list, Streamline V1 support, and new multiple pass slider.
+- **Lumenite Kernel**: v2026.06.06 → v2026.07.28 (https://github.com/umar-afzaal/LumeniteFX)
+- **DLSS5 Bridge**: dlss5-dx11-bridge.addon64 v1.1.0 → dlss5-bridge.addon64 v1.4.8 (https://github.com/NIGos/dlss5-bridge)
+- **DLSS5 Feeder**: 0.8.0-beta.3 → 0.12.1-beta.2 (https://github.com/jlrouzies-fr/DLSS5-Feeder)
+  - Added: dlss5-feed.addon32, dlss5-feed.addon64, dlss5-feed-host64.exe, DLSS5_Feed.fx
+
+### Base
+- Keeps **Streamline V1** as binaries base (no V2 beta).
+
+### Notes
+- Experimental DX9 (32/64-bit) support is still in development and not included in this release.
+
+---
+
 ## Contents
 
 - [Requirements](#requirements)
