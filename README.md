@@ -1,4 +1,4 @@
-# Easy AIO Installer: DLSS 5 + RenoDX + Lumenite ReShade Pack v2.2
+# Easy AIO Installer: DLSS 5 + DFC Neural Rendering Pack v3.0.1
 
 **by Kry0genik**  
 [![Nexus Mods](https://img.shields.io/badge/Nexus%20Mods-DLSS%205%20AIO-blue)](https://www.nexusmods.com/site/mods/2251)  
@@ -6,35 +6,61 @@
 [![GitHub release](https://img.shields.io/github/v/release/shTNT/Easy-AIO-Installer-DLSS5-NR)](https://github.com/shTNT/Easy-AIO-Installer-DLSS5-NR/releases)  
 [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
 
-> A hassle-free installer that automates the installation of DLSS 5 Neural Rendering (NR) into your game folder. No manual file hunting, no complex guides. Everything is pre-configured and ready to use.
+> A standalone, offline installer that deploys **DLSS 5 Neural Rendering** into any compatible game, emulator, or legacy title — regardless of graphics API or bitness. Six routes, one wizard. Every dependency ships inside the installer. Nothing is downloaded at install time.
 
 ---
 
-## What's new in v2.2
+## What's new in v3.0.1
 
-### Updated components
-- **RenoDX DLSS add-on**: multithreaded command list, Streamline V1 support, and new multiple pass slider.
-- **Lumenite Kernel**: v2026.06.06 → v2026.07.28 (https://github.com/umar-afzaal/LumeniteFX)
-- **DLSS5 Bridge**: dlss5-dx11-bridge.addon64 v1.1.0 → dlss5-bridge.addon64 v1.4.8 (https://github.com/NIGos/dlss5-bridge)
-- **DLSS5 Feeder**: 0.8.0-beta.3 → 0.12.1-beta.2 (https://github.com/jlrouzies-fr/DLSS5-Feeder)
-  - Added: dlss5-feed.addon32, dlss5-feed.addon64, dlss5-feed-host64.exe, DLSS5_Feed.fx
+### Neural stack replaced
 
-### Base
-- Keeps **Streamline V1** as binaries base (no V2 beta).
+- **Deep Fried Chicken 2.0** replaces RenoDX and Lumenite as the neural consumer across all routes.
+- **Motion providers** now split by route:
+  - **VORT** (luma-based optical flow) on Modern and Legacy x32 routes.
+  - **iMMERSE Launchpad** (NVIDIA Optical Flow) on Vulkan and Legacy x64 routes.
 
-### Notes
-- Experimental DX9 (32/64-bit) support is still in development and not included in this release.
+### Six installation routes
+
+Full coverage from **DX8** through **DX12**, both **32-bit and 64-bit**, native and synthetic DLSS contracts. See [The six routes](#the-six-routes).
+
+### host64 architecture
+
+DFC and NGX are strictly 64-bit. To bring DLSS 5 NR to 32-bit games, the installer deploys a companion `host64\` subfolder running a 64-bit ReShade + DFC + NGX pipeline that exchanges frames with the 32-bit game via shared textures and a named pipe.
+
+### DXVK x64 and x86 bundled
+
+Legacy DX9/DX10/DX11 titles are translated to Vulkan via DXVK, where ReShade hooks as a machine-wide Vulkan layer. No local ReShade DLLs are deployed for these routes.
+
+### DXGI overrider system
+
+On local-DLL routes, ReShade is renamed to `d3d10.dll` / `d3d11.dll` / `d3d12.dll` to prevent conflicts with the Vulkan global layer.
+
+### Cleanup
+
+- **`PurgeShadersExceptCore`** replaces the old `DelTree` on `reshade-shaders\`. Third-party shaders are purged, but the mandatory ReShade `.fxh` headers and `DisplayDepth.fx` are preserved.
+- **OptiScaler** leftovers are removed (conflicts with DFC).
+- **dgVoodoo** leftovers are removed (no longer needed — Routes 5 and 6 handle legacy APIs natively via DXVK).
+- ENB is **not** touched (out of scope).
+
+### Other changes
+
+- **Six languages**: English, Spanish, French, Italian, Russian, Simplified Chinese.
+- **Wizard scaled to 140%**, modern dark theme.
+- **Route detail panel** — click any route to read its description.
+- **Ready-to-Install summary** — the wizard lists exactly which files will be deployed before you commit.
 
 ---
 
 ## Contents
 
 - [Requirements](#requirements)
-- [File Index & Sources](#file-index--sources)
-- [Known Issues](#known-issues--fixes)
-- [Installation](#installation-steps)
-- [In-Game Controls](#in-game-controls)
+- [The six routes](#the-six-routes)
+- [File index & sources](#file-index--sources)
+- [Installation steps](#installation-steps)
+- [In-game controls](#in-game-controls)
 - [Adjusting Neural Rendering](#adjusting-neural-rendering)
+- [Unsupported games](#unsupported-games)
+- [Known issues & fixes](#known-issues--fixes)
 - [Transparency](#transparency)
 - [Disclaimer](#disclaimer)
 
@@ -42,83 +68,132 @@
 
 ## Requirements
 
-- ReShade 6.8.0+ with **Full Add-on Support** installed in the game folder.
-- A game with a working depth buffer.
-- NVIDIA RTX 20/30/40/50 series GPU (RTX 30+ recommended).
-- Latest NVIDIA drivers.
-- Single-player games (anti-cheat may block injection).
+- **ReShade 6.8.0 or higher** with **Full Add-on Support** installed in the game folder by you **before** running this installer.
+  - For **Native DX11/DX12** and **Modern** routes: ReShade as `dxgi.dll` is fine.
+  - For **Vulkan** (Emulator) and **DXVK** (Legacy x64/x32) routes: ReShade must be installed as a **Vulkan layer**, not as `dxgi.dll`.
+- **NVIDIA RTX GPU** — 20/30/40/50 series. RTX 30+ recommended for good performance.
+- **Latest NVIDIA drivers**.
+- **Game with a working depth buffer** — except VORT/Launchpad routes which generate motion.
+- **Single-player games** (anti-cheat may block injection).
+- **Game folder without restricted write permissions**.
+
+> The installer augments an existing ReShade install. It never installs ReShade for you.
 
 ---
 
-## File Index & Sources
+## The six routes
+
+| # | Route | API | Bitness | Native DLSS | Neural consumer | Motion provider |
+|---|-------|-----|---------|-------------|-----------------|-----------------|
+| 1 | NATIVE DX12 | D3D12 | x64 | Yes | DFC | — |
+| 2 | NATIVE DX11 | D3D11 | x64 | Yes | DFC + Bridge | — |
+| 3 | MODERN | D3D10 / D3D11 / D3D12 | x64 | No | DFC + Feeder | VORT |
+| 4 | VULKAN | Vulkan | x64 | No | DFC + Feeder | iMMERSE Launchpad |
+| 5 | LEGACY x64 | D3D9 → Vulkan (DXVK x64) | x64 | No | DFC + Feeder | iMMERSE Launchpad |
+| 6 | LEGACY x32 | D3D8 / D3D9 / D3D10 / D3D11 → Vulkan (DXVK x86) | x86 | No | DFC + Feeder + host64 | VORT |
+
+- **Route 3** has a sub-page to pick the exact DirectX version (DX10 / DX11 / DX12 / Compatibility).
+- **Route 6** deploys the full DXVK x86 set: `d3d8.dll`, `d3d9.dll`, `d3d10core.dll`, `d3d11.dll`, `dxgi.dll`.
+
+---
+
+## File index & sources
 
 | Component | File(s) | Version / Source |
 |-----------|---------|------------------|
-| DLSS 5 Neural Rendering Add-on | `renodx-dlss5.addon64` | v4.7 (not ShortFuse's mod) |
-| Lumenite Motion Vectors | `lumenite_Kernel.fx` + includes | [LumeniteFX](https://github.com/umar-afzaal/LumeniteFX) |
-| DLSS5 Bridge (native DLSS) | `dlss5-dx11-bridge.addon64` | v1.4.1 – [NIGos/dlss5-bridge](https://github.com/NIGos/dlss5-bridge/releases/tag/v1.4.1) |
-| DLSS5 Feeder (non-native DLSS) | `dlss5-feed.addon64` | v0.11.0-beta.2 – [jlrouzies-fr/DLSS5-Feeder](https://github.com/jlrouzies-fr/DLSS5-Feeder/releases/tag/v0.11.0-beta.2) |
-| DLSS5 Feed Shader | `DLSS5_Feed.fx` | Bundled with Feeder |
-| Patched DLSS-NR | `nvngx_dlssnr.dll` | RenoDX SF patched |
-| NVIDIA Streamline DLLs | `nvngx_dlss.dll`, `nvngx_dlssg.dll`, ... | RenoDX Streamline Files |
-| ReShade Configuration | `ReShade.ini` | `DLSS5_MV_PROVIDER=3` |
-| ReShade Preset | `ReshadePreset.ini` | Load order: Lumenite_Kernel → DLSS5_Feed |
-| Lumenite Textures | `lumenite_bluenoise256.png` | LumeniteFX |
-| Installer Music | `musicainstalador.mp3` | Custom |
-| Wizard Image | `fotoinstalador.bmp` | Custom |
+| Neural consumer | `deep-fried-chicken.addon64`, `deep-fried-chicken-nvngx.dll`, `deep-fried-chicken.cfg` | Deep Fried Chicken 2.0 — Alexander's Discord |
+| DLSS5 Feeder | `dlss5-feed.addon64`, `dlss5-feed.addon32`, `dlss5-feed-host64.exe`, `DLSS5_Feed.fx` | [jlrouzies-fr/DLSS5-Feeder](https://github.com/jlrouzies-fr/DLSS5-Feeder) |
+| DLSS5 Bridge (Route 2) | `dlss5-bridge.addon64` | [NIGos/dlss5-bridge](https://github.com/NIGos/dlss5-bridge) |
+| Patched DLSS-NR | `nvngx_dlssnr.dll` | RenoDX Discord (must be signed for some games) |
+| NVIDIA Streamline DLLs | `nvngx_dlss.dll`, `sl.common.dll`, `sl.dlss.dll`, `sl.dlss_g.dll`, `sl.dlss_nr.dll`, `sl.interposer.dll`, `sl.nis.dll`, `sl.pcl.dll`, `sl.reflex.dll` | Bundled |
+| DXVK | x64: `d3d9.dll`, `dxgi.dll` · x86: `d3d8.dll`, `d3d9.dll`, `d3d10core.dll`, `d3d11.dll`, `dxgi.dll` | [doitsujin/dxvk](https://github.com/doitsujin/dxvk) |
+| VORT shaders | `vort_Motion.fx`, `vort_Static.fx`, `vort_*.fxh`, textures | [vortigern11/vort_Shaders](https://github.com/vortigern11/vort_Shaders) |
+| iMMERSE Launchpad | `MartysMods_LAUNCHPAD.fx` + shaders, `mmx_*.fxh`, textures | MartysMods |
+| ReShade overriders | `d3d10.dll`, `d3d11.dll`, `d3d12.dll`, `x64pure\dxgi.dll` | ReShade 6.8.0+ renamed |
+| ReShade configs | `ReShade.ini`, `ReshadePreset.ini` | Prebaked, per route |
+| Installer media | `fotoinstalador.png`, `musicainstalador.mp3` | Custom |
+
+License files for every third-party component are bundled in `licenses\` next to the game folder after install.
 
 ---
 
-## Known Issues & Fixes - Generic & Per-Game Workarounds
+## Installation steps
 
-See the full guide on the [documentation site](https://github.com/shTNT/Easy-AIO-Installer-DLSS5-NR/tree/main/docs).
-
----
-
-## Installation Steps
-
-1. Download the installer: `EasyAIO_DLSS5_Lumenite_v2.1_Setup.exe`.
-2. Run it.
-3. Select the game folder (where the main `.exe` is located).
-4. Confirm you have ReShade with add-on support (if not, it will open the official site).
-5. Choose the correct option:
-   - **[YES]** = Game has Native DLSS → installs `dlss5-dx11-bridge.addon64`
-   - **[NO]** = Game does NOT have Native DLSS → installs `dlss5-feed.addon64`
-6. Wait for the installation to finish (a chime will sound).
-7. Launch the game. Neural Rendering is active by default.
+1. Install **ReShade 6.8.0+ with Full Add-on Support** into the game folder yourself.
+   - On the effect-selection screen, leave **everything unchecked** — this pack ships its own shaders.
+   - For Vulkan routes (4, 5, 6), install ReShade as a **Vulkan layer**, not as `dxgi.dll`.
+2. Download and run `EasyAIO_DLSS5_DFC_v3.0.1_Setup.exe`.
+3. Select the **game folder** — the one containing the main `.exe`, not a launcher or shortcut.
+4. Confirm the ReShade requirement (clicking NO opens the official download page and pauses the installer).
+5. Pick the **route** that matches your game. Click any route to read its description in the panel below.
+6. (Route 3 only) Pick the exact DirectX version on the next page.
+7. Review the Ready-to-Install summary — it lists every file that will be deployed.
+8. Wait for the install to finish (a chime sounds).
 
 ---
 
-## In-Game Controls
+## In-game controls
 
-- **HOME** – Open/close ReShade overlay
-- **DEL** – Toggle all effects ON/OFF
-- **PRINT SCREEN** – Take a screenshot (saved in `.\ReShade Screenshots`)
+- **HOME** — open / close the ReShade overlay
+- **DEL** — toggle all effects ON/OFF
+- **PRINT SCREEN** — screenshot (saved to `.\ReShade Screenshots`). If Windows intercepts it (Snip & Sketch on Win11), rebind it in ReShade's Settings tab.
 
 ---
 
 ## Adjusting Neural Rendering
 
 1. Open the overlay with **HOME**.
-2. Go to the **Add-ons** tab.
-3. Find **DLSS 5 Neural Rendering**.
-4. Use the **NR Intensity** slider to increase or decrease the effect.
-5. If sliders are greyed out, adjust the color channel sliders.
+2. Go to the **Deep Fried Chicken** tab.
+3. Tune the NR intensity and preset there.
+4. If you're on a Vulkan route, open ReShade's **Settings** tab and confirm the Vulkan layer is active.
+
+---
+
+## Unsupported games
+
+### Native Vulkan games with DLSS
+
+**No Man's Sky**, **DOOM Eternal**, **Wolfenstein Youngblood**, and **RDR2** in Vulkan mode are **not** supported. DFC cannot arm against a native Vulkan DLSS contract — the resource map never completes (confirmed empirically on DOOM Eternal with 46,000+ fail-open iterations).
+
+**Workaround:** use DX12 mode where available (RDR2 supports DX12).
+
+### DirectX 8 pre-2003 (LithTech Talos)
+
+**Aliens vs. Predator 2** and other pre-2003 DX8 titles that probe D3D11 at startup will crash in the Windows `d3d11.dll` when a DXGI provider is present. Not supported.
+
+---
+
+## Known issues & fixes
+
+Full guide: **[docs/known-issues.md](docs/known-issues.md)**
+
+Quick hits:
+
+| Symptom | Cause | Fix |
+|---------|-------|-----|
+| Cyberpunk 2077 — DFC pauses, `FeatureNotSupported 0xBAD00001` on feature 18 | Patched `nvngx_dlssnr.dll` fails NVIDIA signature validation | Use a clean signed binary |
+| Metro 2033 Redux — Feeder fails to load | 4A Engine triple-init | Use Route 5 instead |
+| RDR2 — Social Club graphics error in Vulkan mode | Known RDR2 Vulkan limitation | Force DX12 in `system.xml`, use Route 1 |
+| Error 1114 — requested API version 20 not supported (18) | ReShade build too old | Reinstall ReShade from reshade.me (latest) |
+| `ReShade64.dll` being used by another process | Vulkan layer loaded in another process | Restart PC |
+| Missing `ReShade.fxh` | ReShade installed without standard effects | Reinstall ReShade with standard effects — the installer preserves `.fxh` automatically |
 
 ---
 
 ## Transparency
 
-- Full installer source code is included in this repository.
-- File tree and file index are provided.
-- The installer only uses publicly available patched NVIDIA DLLs and ReShade files.
+- Full installer source (`.iss`) is included in this repository.
+- File tree and file index are documented in [docs/](docs/).
+- The installer only uses publicly available DLLs and ReShade add-ons, all credited above.
+- The installer never touches `C:\ProgramData\ReShade\` — your global Vulkan layer is off-limits.
+- The installer never touches ENB files.
 
 ---
 
 ## Disclaimer
 
 Your antivirus will probably flag this installer.  
-That's normal – it contains DLL injection and ReShade add-ons.  
+That's normal — it contains DLL injection and ReShade add-ons.  
 Use [innoextract](https://constexpr.org/innoextract/) to inspect the files yourself.
 
 This installer is free to distribute, modify, and share without restriction.  
