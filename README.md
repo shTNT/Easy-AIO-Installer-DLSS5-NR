@@ -99,13 +99,13 @@ On local-DLL routes, ReShade is renamed to `d3d10.dll` / `d3d11.dll` / `d3d12.dl
 
 ## File index & sources
 
-| Component | File(s) | Version / Source |
-|-----------|---------|------------------|
-| Neural consumer | `deep-fried-chicken.addon64`, `deep-fried-chicken-nvngx.dll`, `deep-fried-chicken.cfg` | Deep Fried Chicken 2.0 — Alexander's Discord |
+| Component | File(s) | Source |
+|-----------|---------|--------|
+| Neural consumer | `deep-fried-chicken.addon64`, `deep-fried-chicken-nvngx.dll`, `deep-fried-chicken.cfg` | Deep Fried Chicken 2.0 |
 | DLSS5 Feeder | `dlss5-feed.addon64`, `dlss5-feed.addon32`, `dlss5-feed-host64.exe`, `DLSS5_Feed.fx` | [jlrouzies-fr/DLSS5-Feeder](https://github.com/jlrouzies-fr/DLSS5-Feeder) |
 | DLSS5 Bridge (Route 2) | `dlss5-bridge.addon64` | [NIGos/dlss5-bridge](https://github.com/NIGos/dlss5-bridge) |
-| Patched DLSS-NR | `nvngx_dlssnr.dll` | RenoDX Discord (must be signed for some games) |
-| NVIDIA Streamline DLLs | `nvngx_dlss.dll`, `sl.common.dll`, `sl.dlss.dll`, `sl.dlss_g.dll`, `sl.dlss_nr.dll`, `sl.interposer.dll`, `sl.nis.dll`, `sl.pcl.dll`, `sl.reflex.dll` | Bundled |
+| NVIDIA DLSS runtime | `nvngx_dlss.dll`, `nvngx_dlssnr.dll` | Bundled |
+| NVIDIA Streamline DLLs | `sl.common.dll`, `sl.dlss.dll`, `sl.dlss_g.dll`, `sl.dlss_nr.dll`, `sl.interposer.dll`, `sl.nis.dll`, `sl.pcl.dll`, `sl.reflex.dll` | Bundled |
 | DXVK | x64: `d3d9.dll`, `dxgi.dll` · x86: `d3d8.dll`, `d3d9.dll`, `d3d10core.dll`, `d3d11.dll`, `dxgi.dll` | [doitsujin/dxvk](https://github.com/doitsujin/dxvk) |
 | VORT shaders | `vort_Motion.fx`, `vort_Static.fx`, `vort_*.fxh`, textures | [vortigern11/vort_Shaders](https://github.com/vortigern11/vort_Shaders) |
 | iMMERSE Launchpad | `MartysMods_LAUNCHPAD.fx` + shaders, `mmx_*.fxh`, textures | MartysMods |
@@ -153,13 +153,9 @@ License files for every third-party component are bundled in `licenses\` next to
 
 ### Native Vulkan games with DLSS
 
-**No Man's Sky**, **DOOM Eternal**, **Wolfenstein Youngblood**, and **RDR2** in Vulkan mode are **not** supported. DFC cannot arm against a native Vulkan DLSS contract — the resource map never completes (confirmed empirically on DOOM Eternal with 46,000+ fail-open iterations).
+**No Man's Sky**, **DOOM Eternal**, **Wolfenstein Youngblood**, and **RDR2** in Vulkan mode are **not** supported. DFC cannot arm against a native Vulkan DLSS contract — the resource map never completes.
 
 **Workaround:** use DX12 mode where available (RDR2 supports DX12).
-
-### DirectX 8 pre-2003 (LithTech Talos)
-
-**Aliens vs. Predator 2** and other pre-2003 DX8 titles that probe D3D11 at startup will crash in the Windows `d3d11.dll` when a DXGI provider is present. Not supported.
 
 ---
 
@@ -171,7 +167,6 @@ Quick hits:
 
 | Symptom | Cause | Fix |
 |---------|-------|-----|
-| Cyberpunk 2077 — DFC pauses, `FeatureNotSupported 0xBAD00001` on feature 18 | Patched `nvngx_dlssnr.dll` fails NVIDIA signature validation | Use a clean signed binary |
 | Metro 2033 Redux — Feeder fails to load | 4A Engine triple-init | Use Route 5 instead |
 | RDR2 — Social Club graphics error in Vulkan mode | Known RDR2 Vulkan limitation | Force DX12 in `system.xml`, use Route 1 |
 | Error 1114 — requested API version 20 not supported (18) | ReShade build too old | Reinstall ReShade from reshade.me (latest) |
@@ -184,7 +179,6 @@ Quick hits:
 
 - Full installer source (`.iss`) is included in this repository.
 - File tree and file index are documented in [docs/](docs/).
-- The installer only uses publicly available DLLs and ReShade add-ons, all credited above.
 - The installer never touches `C:\ProgramData\ReShade\` — your global Vulkan layer is off-limits.
 - The installer never touches ENB files.
 
