@@ -40,7 +40,6 @@ Standalone offline installer that deploys **DLSS 5 Neural Rendering** into any c
 | Route | Game | Notes |
 |-------|------|-------|
 | 1 | Gothic 1 Remake | Native DX12 + DLSS, MFG and Reflex native |
-| 1 | Cyberpunk 2077 | Requires signed `nvngx_dlssnr.dll` or signature validation disabled |
 | 2 | Crysis Remastered | DFC + Bridge load, NR applies |
 | 3 | Fallout 4 | DX11 sub-mode required, Compat breaks |
 | 3 | Fallout: New Vegas | — |
@@ -51,14 +50,13 @@ Standalone offline installer that deploys **DLSS 5 Neural Rendering** into any c
 | 6 | Far Cry 2 (DX10 mode) | — |
 | 6 | BioShock Infinite (DX11) | — |
 
-**Pending certification:** PCSX2 (any title), any DX8 32-bit title.
+**Pending certification:** PCSX2 (any title).
 
 ---
 
 ## Unsupported
 
-- **Native Vulkan games with DLSS** — No Man's Sky, DOOM Eternal, Wolfenstein Youngblood, RDR2 in Vulkan mode. Use DX12 mode where available.
-- **Pre-2003 DX8 (LithTech Talos)** — Aliens vs. Predator 2 and similar titles.
+**Native Vulkan games with DLSS** — No Man's Sky, DOOM Eternal, Wolfenstein Youngblood, RDR2 in Vulkan mode. Use DX12 mode where available.
 
 ---
 
