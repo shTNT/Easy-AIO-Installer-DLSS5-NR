@@ -1,14 +1,16 @@
+<div align="center">
+
 # Easy AIO Installer: DLSS 5 + DFC Neural Rendering Pack v3.0.1
 
-**by Kry0genik**  
-[![Nexus Mods](https://img.shields.io/badge/Nexus%20Mods-DLSS%205%20AIO-blue)](https://www.nexusmods.com/site/mods/2251)  
-[![GitHub Pages](https://img.shields.io/badge/Docs-GitHub%20Pages-green)](https://shTNT.github.io/Easy-AIO-Installer-DLSS5-NR/)  
-[![GitHub release](https://img.shields.io/github/v/release/shTNT/Easy-AIO-Installer-DLSS5-NR)](https://github.com/shTNT/Easy-AIO-Installer-DLSS5-NR/releases)  
-[![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
-![Easy AIO Installer — Full Compatibility Matrix — 6 Routes](https://raw.githubusercontent.com/shTNT/Easy-AIO-Installer-DLSS5-NR/main/assets/compatibility-matrix.png)
+**by Kry0genik**
 
----
-> A standalone, offline installer that deploys **DLSS 5 Neural Rendering** into any compatible game, emulator, or legacy title — regardless of graphics API or bitness. Six routes, one wizard. Every dependency ships inside the installer. Nothing is downloaded at install time.
+[![Nexus Mods](https://img.shields.io/badge/Nexus%20Mods-DLSS%205%20AIO-blue)](https://www.nexusmods.com/site/mods/2251) [![GitHub Pages](https://img.shields.io/badge/Docs-GitHub%20Pages-green)](https://shTNT.github.io/Easy-AIO-Installer-DLSS5-NR/) [![GitHub release](https://img.shields.io/github/v/release/shTNT/Easy-AIO-Installer-DLSS5-NR)](https://github.com/shTNT/Easy-AIO-Installer-DLSS5-NR/releases) [![License](https://img.shields.io/badge/License-MIT-lightgrey)](LICENSE)
+
+<img src="https://raw.githubusercontent.com/shTNT/Easy-AIO-Installer-DLSS5-NR/main/assets/compatibility-matrix.png" alt="Easy AIO Installer — Full Compatibility Matrix — 6 Routes" width="100%">
+
+*A standalone, offline installer that deploys **DLSS 5 Neural Rendering** into any compatible game, emulator, or legacy title — regardless of graphics API or bitness. Six routes, one wizard. Every dependency ships inside the installer. Nothing is downloaded at install time.*
+
+</div>
 
 ---
 
@@ -194,4 +196,5 @@ Use [innoextract](https://constexpr.org/innoextract/) to inspect the files yours
 
 This installer is free to distribute, modify, and share without restriction.  
 Use it at your own risk. The author is not responsible for any damage, multiplayer bans, or unexpected behavior.  
+If your PC explodes, that's on you. Enjoy the pack responsibly.
 If your PC explodes, that's on you. Enjoy the pack responsibly.
