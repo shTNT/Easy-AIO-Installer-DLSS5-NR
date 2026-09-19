@@ -32,8 +32,7 @@ Before installing the pack, make sure you meet these requirements:
 
 ## Not supported
 
-- Native Vulkan games with DLSS (No Man's Sky, DOOM Eternal, Wolfenstein Youngblood, RDR2 in Vulkan mode). Use DX12 mode where available.
-- Pre-2003 DirectX 8 titles (LithTech Talos engine).
+Native Vulkan games with DLSS (No Man's Sky, DOOM Eternal, Wolfenstein Youngblood, RDR2 in Vulkan mode). Use DX12 mode where available.
 
 ---
 
