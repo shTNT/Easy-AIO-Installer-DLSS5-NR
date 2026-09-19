@@ -1,11 +1,11 @@
 ---
 title: "File Index & Sources – Easy AIO Installer DLSS5 NR"
-description: "Complete file index of the Easy AIO Installer for DLSS 5 Neural Rendering: components, versions, and original sources. Transparent and safe."
+description: "Complete file index of the Easy AIO Installer for DLSS 5 Neural Rendering: components and original sources."
 ---
 
 # File Index & Sources
 
-This page lists every file included in the **Easy AIO Installer: DLSS 5 + DFC Neural Rendering Pack v3.0.1**, along with its version and original source where available.
+This page lists every file included in the **Easy AIO Installer: DLSS 5 + DFC Neural Rendering Pack v3.0.1**, along with its original source where available.
 
 All files are placed automatically by the installer based on the route you select. The installer also removes conflicting add-ons from previous installations before deploying.
 
@@ -13,13 +13,13 @@ All files are placed automatically by the installer based on the route you selec
 
 ## Core components
 
-| Component | File(s) | Version / Source |
-|-----------|---------|------------------|
-| Neural consumer | `deep-fried-chicken.addon64`, `deep-fried-chicken-nvngx.dll`, `deep-fried-chicken.cfg` | Deep Fried Chicken 2.0 — Alexander's Discord |
+| Component | File(s) | Source |
+|-----------|---------|--------|
+| Neural consumer | `deep-fried-chicken.addon64`, `deep-fried-chicken-nvngx.dll`, `deep-fried-chicken.cfg` | Deep Fried Chicken 2.0 |
 | DLSS5 Feeder | `dlss5-feed.addon64`, `dlss5-feed.addon32`, `dlss5-feed-host64.exe`, `DLSS5_Feed.fx` | [jlrouzies-fr/DLSS5-Feeder](https://github.com/jlrouzies-fr/DLSS5-Feeder) |
 | DLSS5 Bridge (Route 2) | `dlss5-bridge.addon64` | [NIGos/dlss5-bridge](https://github.com/NIGos/dlss5-bridge) |
-| Patched DLSS-NR | `nvngx_dlssnr.dll` | RenoDX Discord (must be signed for some games) |
-| NVIDIA Streamline DLLs | `nvngx_dlss.dll`, `sl.common.dll`, `sl.dlss.dll`, `sl.dlss_g.dll`, `sl.dlss_nr.dll`, `sl.interposer.dll`, `sl.nis.dll`, `sl.pcl.dll`, `sl.reflex.dll` | Bundled |
+| NVIDIA DLSS runtime | `nvngx_dlss.dll`, `nvngx_dlssnr.dll` | Bundled |
+| NVIDIA Streamline DLLs | `sl.common.dll`, `sl.dlss.dll`, `sl.dlss_g.dll`, `sl.dlss_nr.dll`, `sl.interposer.dll`, `sl.nis.dll`, `sl.pcl.dll`, `sl.reflex.dll` | Bundled |
 | DXVK x64 | `d3d9.dll`, `dxgi.dll` | [doitsujin/dxvk](https://github.com/doitsujin/dxvk) |
 | DXVK x86 | `d3d8.dll`, `d3d9.dll`, `d3d10core.dll`, `d3d11.dll`, `dxgi.dll` | [doitsujin/dxvk](https://github.com/doitsujin/dxvk) |
 | VORT shaders | `vort_Motion.fx`, `vort_Static.fx`, `vort_*.fxh`, textures | [vortigern11/vort_Shaders](https://github.com/vortigern11/vort_Shaders) |
@@ -85,9 +85,7 @@ On Routes 4, 5, 6 no local ReShade DLL is deployed at the game root — ReShade 
 
 ## License files
 
-Every third-party component ships with its license file inside `licenses\` next to the game folder after install, including (but not limited to):
-
-`LICENSE-Deep-Fried-Chicken.md`, `LICENSE-DLSSFeeder.txt`, `LICENSE-DLSSBridge.txt`, `LICENSE-DXVK.txt`, `LICENSE-IMMERSEShaders.txt`, `LICENSE-RenoDX.md`, `LICENSE-Vort.txt`, `Detours-LICENSE.md`, `DLSSNR-Cost-Scaler-MIT.txt`, `optimizer-fps-dlss5-MIT.txt`, `ReShade-LICENSE.md`, and the root `MIT LICENSE.txt`.
+Every third-party component ships with its respective license file inside `licenses\` next to the game folder after install.
 
 ---
 
