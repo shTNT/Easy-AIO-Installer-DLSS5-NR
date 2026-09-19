@@ -30,7 +30,7 @@ If the ReShade overlay itself does not open, the problem is upstream of this pac
 - **Cause:** ReShade was installed without the standard effects pack.
 - **Fix:** Reinstall ReShade with Full Add-on Support and make sure standard effects are included, then run the Easy AIO Installer again. The installer's cleanup preserves the mandatory `.fxh` headers, so this error is almost always caused by the ReShade install itself.
 
-### Installer ran but no DFC shaders or add-ons appear
+### Installer ran but no shaders or add-ons appear
 
 - **Symptom:** ReShade overlay opens and standard effects compile, but `DLSS5_Feed.fx`, VORT or Launchpad shaders, or the DFC add-on never appear.
 - **Cause:** The installer was pointed to the wrong folder — a launcher folder, a parent directory, or a subfolder like `Binaries\` instead of the folder containing the main `.exe`.
@@ -93,11 +93,6 @@ If the ReShade overlay itself does not open, the problem is upstream of this pac
 
 ## Per-game issues & fixes
 
-### Cyberpunk 2077 — DFC pauses, `FeatureNotSupported 0xBAD00001` on feature 18
-
-- **Cause:** The patched `nvngx_dlssnr.dll` fails NVIDIA's signature validation.
-- **Fix:** Use a clean, signed binary.
-
 ### Metro 2033 Redux — Feeder fails to load
 
 - **Cause:** The 4A Engine triple-initialises the graphics device and the Feeder process does not survive.
@@ -130,7 +125,7 @@ The installer no longer requires manual dgVoodoo2 setup. DX9 titles are handled 
 - **Route 5** — 64-bit DX9 games via DXVK x64 + Feeder + iMMERSE Launchpad.
 - **Route 6** — 32-bit DX8/DX9/DX10/DX11 games via DXVK x86 + `host64` + Feeder + VORT.
 
-If a DX9 title does not work on Route 5 or 6, it is likely an unsupported engine behaviour (see **Unsupported** below), not a missing setup step.
+If a DX9 title does not work on Route 5 or 6, it is likely an unsupported engine behaviour, not a missing setup step.
 
 ---
 
@@ -141,10 +136,6 @@ If a DX9 title does not work on Route 5 or 6, it is likely an unsupported engine
 No Man's Sky, DOOM Eternal, Wolfenstein Youngblood, and RDR2 in Vulkan mode are **not** supported. DFC cannot arm against a native Vulkan DLSS contract — the resource map never completes.
 
 **Workaround:** Use DX12 mode where available (RDR2 supports DX12).
-
-### Pre-2003 DirectX 8 (LithTech Talos)
-
-Aliens vs. Predator 2 and similar titles probe D3D11 at startup when a DXGI provider is present and crash in the Windows `d3d11.dll`. Not supported.
 
 ---
 
